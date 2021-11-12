@@ -183,7 +183,12 @@ i{
 							  <option value="12">12</option>
 							</select>
 						</div>
-						
+						<div class="col-12 col-md-6">
+						<div class="form-check">
+							<input type="checkbox" class="form-check-input" id="already-staking">
+							<label class="form-check-label" for="already-staking">Already staking</label>
+						  </div>
+						</div>
 						<div class="col-12 col-md-6 offset-md-3">
 							<button type="button" id="calculate-button" class="mt-3 btn btn-success w-100">Calculate</button>
 						</div>
@@ -192,7 +197,7 @@ i{
 					
 					<div class="row hide mt-5 py-4 border-top border-bottom" id="result">
 	
-						<p class="text-center">Asumming an average staking term of <span id="avg-term" class="font-weight-bold">{N}</span> month/s for the rest of stakers, your <span id="result-bag" class="font-weight-bold">{X}</span> RISE will generate aproximately:
+						<p class="text-center">Asumming an average staking term of <span id="avg-term" class="font-weight-bold">{N}</span> month/s for the rest of stakers, your <span id="result-bag" class="font-weight-bold">{X}</span> RISE will generate approximately:
 						</p>
 						<div class="col-12 col-md-6 offset-md-3 text-center">
 							<h5 class="mb-3 p-3" style="border-radius: 50px;background-color:#00bcd4; color:#ffffff;"><span id="daily">0.00</span> USD <span class="little">per day</span></h5>
@@ -245,9 +250,14 @@ i{
 			let term = parseFloat(document.getElementById('staking-term').value);
 			
 			let avg_term = parseFloat(document.getElementById('staking-term-avg').value);
-			
-			
-			let daily = (bag_size*term/(pool_size*avg_term)*0.04*daily_volume);
+
+			let daily = 0;
+
+			if(document.getElementById('already-staking').checked){
+				daily = (bag_size*term/(pool_size*avg_term)*0.04*daily_volume);
+			}else{
+				daily = (bag_size*term/(pool_size*avg_term + bag_size*term)*0.04*daily_volume);
+			}
 			
 			let weekly = daily*7;
 			
