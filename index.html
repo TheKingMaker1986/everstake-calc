@@ -248,9 +248,9 @@ input[type=checkbox]{
 					</div>
 					
 					
-					<div class="row hide mt-5 py-4 border-top border-bottom" id="result">
+					<div class="row hide mt-5 pt-4 pb-0 border-top border-bottom" id="result">
 	
-						<p class="text-center">Assumming an average staking term of <span id="avg-term" class="font-weight-bold">{N}</span> month/s for the rest of stakers, your <span id="result-bag" class="font-weight-bold">{X}</span> RISE will generate approximately:
+						<p class="text-center">Assuming an average staking term of <span id="avg-term" class="font-weight-bold">{N}</span> month/s for the rest of stakers, your <span id="result-bag" class="font-weight-bold">{X}</span> RISE will generate approximately (*):
 						</p>
 						<div class="col-12 col-md-6 offset-md-3 text-center">
 							<h5 class="mb-3 p-3" style="border-radius: 50px;background-color:#00bcd4; color:#ffffff;"><span id="daily">0.00</span> USD <span class="little">per day</span></h5>
@@ -258,7 +258,8 @@ input[type=checkbox]{
 							<h6><span id="monthly">0.00</span> USD <span class="little">per month</span></h6>
 							<h6><span id="yearly">0.00</span> USD <span class="little">per year</span></h6>
 						</div>
-						<hr>
+						<p class="very-little text-justify mb-n2"><b>(*): </b>compound interest is not being considered.</p>
+						
 					</div>
 					
 					<p class="text-center mt-5 little">
@@ -285,11 +286,11 @@ input[type=checkbox]{
 
 	<script>
 
-	let daily_volume_mask = new AutoNumeric('#daily-volume', AutoNumeric.getPredefinedOptions().dotDecimalCharCommaSeparator);
+	let daily_volume_mask = new AutoNumeric('#daily-volume', AutoNumeric.getPredefinedOptions().emptyInputBehavior);
 	daily_volume_mask.set(1000000);
-	let bag_size_mask = new AutoNumeric('#bag-size', AutoNumeric.getPredefinedOptions().dotDecimalCharCommaSeparator);
+	let bag_size_mask = new AutoNumeric('#bag-size', AutoNumeric.getPredefinedOptions().emptyInputBehavior);
 	bag_size_mask.set(1500000);
-	let staking_pool_mask = new AutoNumeric('#staking-pool-size', AutoNumeric.getPredefinedOptions().dotDecimalCharCommaSeparator);
+	let staking_pool_mask = new AutoNumeric('#staking-pool-size', AutoNumeric.getPredefinedOptions().emptyInputBehavior);
 	staking_pool_mask.set(72000000000);
 
 	document.getElementById('calculate-button').onclick = function(){
