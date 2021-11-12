@@ -255,12 +255,22 @@ i{
 			
 			let yearly = daily*365;
 			
-			document.getElementById('daily').innerHTML = daily.toFixed(3);
-			document.getElementById('weekly').innerHTML = weekly.toFixed(3);
-			document.getElementById('monthly').innerHTML = monthly.toFixed(3);
-			document.getElementById('yearly').innerHTML = yearly.toFixed(3);
+			document.getElementById('daily').innerHTML = daily.toLocaleString('en-US',{minimumFractionDigits: 2,
+  maximumFractionDigits: 2
+});
+			document.getElementById('weekly').innerHTML = weekly.toLocaleString('en-US',{minimumFractionDigits: 2,
+  maximumFractionDigits: 2
+});
+			document.getElementById('monthly').innerHTML = monthly.toLocaleString('en-US',{minimumFractionDigits: 2,
+  maximumFractionDigits: 2
+});
+			document.getElementById('yearly').innerHTML = yearly.toLocaleString('en-US',{minimumFractionDigits: 2,
+  maximumFractionDigits: 2
+});
 			
-			document.getElementById('result-bag').innerHTML = bag_size.toFixed(3);
+			document.getElementById('result-bag').innerHTML = bag_size.toFixed(2).toLocaleString('en-US',{minimumFractionDigits: 2,
+  maximumFractionDigits: 2
+});
 			document.getElementById('avg-term').innerHTML = avg_term;
 			
 			document.getElementById('result').classList.remove("hide");
