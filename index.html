@@ -43,12 +43,27 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(255,0,69,1) 100%);
 		font-size: 11pt;
 		}
 		
-		@media (max-width: @screen-xs) {
-    p{font-size: 8pt;}
+		@media (max-width: 480px) {
+    p{font-size: 9pt;}
+	.advanced-settings{
+	margin-top: 0px !important;
+	
 }
 
-@media (max-width: @screen-sm) {
-    p{font-size: 8pt;}
+.collapsable-custom{
+		font-size:9pt !important;
+	}
+}
+
+@media (max-width: 360px) {
+    p{font-size: 9pt;}
+	.advanced-settings{
+	margin-top: 0px !important;
+}
+
+	.collapsable-custom{
+		font-size:9pt !important;
+	}
 }
 
 .hide{
@@ -98,6 +113,20 @@ i{
 input[type=checkbox]{
 	height:17px;
 	width:17px;
+}
+
+.collapsable-custom{
+	padding-left: 0 !important;
+	font-size:10pt;
+}
+
+.advanced-settings{
+	margin-top: -15px;
+}
+
+.very-little{
+	font-size:8pt;
+	color:#00bcd4;
 }
 	</style>
   </head>
@@ -188,12 +217,31 @@ input[type=checkbox]{
 							  <option value="12">12 months</option>
 							</select>
 						</div>
-						<div class="col-12 col-md-6">
+				</div>
+				<div class="row advanced-settings">
+						<div class="col-12 col-md-12 mt-n2">
+						<div id="accordion">
+							<div>								  
+								<button class="btn btn-link collapsable-custom" id="collapse-button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+									Show advanced settings
+								  </button>
+							  </div>
+						  
+							  <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+									
 						<div class="form-check mt-1">
-							<input type="checkbox" class="form-check-input" id="already-staking">
+							<input type="checkbox" class="form-check-input" id="already-staking" checked>
 							<label class="form-check-label" for="already-staking ml-1">&nbsp;Already staking</label>
-						  </div>
+							</div>
+							<p class="very-little text-justify mt-1"><b>Disclaimer: </b>use this option to stablish if your bag size is already included in the staking pool size (already staking) or not. For small bags, the difference is laughable, but as the bag grows, the difference is more noticeable. If advanced settings is hidden, the default value is already staking.</p>
+						
+							  </div>
+							</div>
+							
 						</div>
+					
+						
+
 						<div class="col-12 col-md-6 offset-md-3">
 							<button type="button" id="calculate-button" class="mt-3 btn btn-success w-100">Calculate</button>
 						</div>
@@ -202,7 +250,7 @@ input[type=checkbox]{
 					
 					<div class="row hide mt-5 py-4 border-top border-bottom" id="result">
 	
-						<p class="text-center">Asumming an average staking term of <span id="avg-term" class="font-weight-bold">{N}</span> month/s for the rest of stakers, your <span id="result-bag" class="font-weight-bold">{X}</span> RISE will generate approximately:
+						<p class="text-center">Assumming an average staking term of <span id="avg-term" class="font-weight-bold">{N}</span> month/s for the rest of stakers, your <span id="result-bag" class="font-weight-bold">{X}</span> RISE will generate approximately:
 						</p>
 						<div class="col-12 col-md-6 offset-md-3 text-center">
 							<h5 class="mb-3 p-3" style="border-radius: 50px;background-color:#00bcd4; color:#ffffff;"><span id="daily">0.00</span> USD <span class="little">per day</span></h5>
@@ -258,7 +306,7 @@ input[type=checkbox]{
 
 			let daily = 0;
 
-			if(document.getElementById('already-staking').checked){
+			if(document.getElementById('already-staking').checked || !document.getElementById('collapseOne').classList.contains('show')){
 				daily = (bag_size*term/(pool_size*avg_term)*0.04*daily_volume);
 			}else{
 				daily = (bag_size*term/(pool_size*avg_term + bag_size*term)*0.04*daily_volume);
