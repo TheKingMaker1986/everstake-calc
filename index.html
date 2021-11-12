@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <title>Hello, world!</title>
+	
+	<style>
+	 * {
+      font-family: 'Montserrat', sans-serif;
+    }
+		body{
+		background: rgb(2,0,36);
+background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(255,0,69,1) 100%);
+		}
+		html {
+    height: 100%;
+}
+		#main-calc-container{
+		background-color: #ffffff;
+		border-radius: 20px;
+		}
+		
+		label{
+			font-size: 10pt;
+			font-weight: bold;
+			color: #00796B;
+			
+			}
+		
+		.little{
+			font-size: 10pt;
+			}
+			
+		p{
+		font-size: 11pt;
+		}
+		
+		@media (max-width: @screen-xs) {
+    p{font-size: 8pt;}
+}
+
+@media (max-width: @screen-sm) {
+    p{font-size: 8pt;}
+}
+
+.hide{
+	display:none;
+	}
+	
+	.show{
+		display:block;
+		}
+
+	</style>
+  </head>
+  <body class="px-2">
+
+	<section id="header"></section>
+	
+	<section id="calc" class="mt-5">
+		<div class="container">
+			<div class="row">
+				<div id="main-calc-container" class="offset-lg-2 col-lg-8 px-5 pt-5 pb-0 mb-3">
+				
+					<div class="row text-center">
+						<div class="col-12 text-center">
+							<h3 class="font-weight-bold">EverStake Calculator</h3>
+						</div>
+					</div>
+					<div class="row mt-4">
+						<p class="text-center">
+							Staking pools are chain-specific. This model takes into account the daily volume in usd on a specific chain (4% goes to stakers), your bag size, the staking pool size (both in RISE), your chosen staking term and an assumption on the average staking term for the rest of the pool.
+						</p>
+						
+						
+						<div class="col-md-6 col-12 ">
+							<div class="form-group">
+								<label for="exampleFormControlInput1">Staking pool size (RISE)</label>
+								<input type="email" class="form-control" id="staking-pool-size" placeholder="72000000000">
+							</div>
+						</div>
+						
+						<div class="col-md-6 col-12 ">
+							<div class="form-group">
+								<label for="exampleFormControlInput1">Daily volume (USD)</label>
+								<input type="email" class="form-control" id="daily-volume" placeholder="2000000">
+							</div>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-md-6 col-12 ">
+							<div class="form-group">
+								<label for="exampleFormControlInput1">Your bag size (RISE)</label>
+								<input type="email" class="form-control" id="bag-size" placeholder="72000000000">
+							</div>
+						</div>
+						
+						<div class="col-12 col-md-3">
+							<label for="exampleFormControlSelect1">Your staking term</label>
+							<select class="form-control" id="staking-term">
+							  <option value="1">1</option>
+							  <option value="2">2</option>
+							  <option value="3">3</option>
+							  <option value="4">4</option>
+							  <option value="5">5</option>
+							  <option value="6">6</option>
+							  <option value="7">7</option>
+							  <option value="8">8</option>
+							  <option value="9">9</option>
+							  <option value="10">10</option>
+							  <option value="11">11</option>
+							  <option value="12">12</option>
+							</select>
+						</div>
+						
+						<div class="col-12 col-md-3">
+							<label for="exampleFormControlSelect1">Avg. staking term</label>
+							<select class="form-control" id="staking-term-avg">
+							  <option value="1">1</option>
+							  <option value="2">2</option>
+							  <option value="3">3</option>
+							  <option value="4">4</option>
+							  <option value="5">5</option>
+							  <option value="6">6</option>
+							  <option value="7">7</option>
+							  <option value="8">8</option>
+							  <option value="9">9</option>
+							  <option value="10">10</option>
+							  <option value="11">11</option>
+							  <option value="12">12</option>
+							</select>
+						</div>
+						
+						<div class="col-12 col-md-6 offset-md-3">
+							<button type="button" id="calculate-button" class="mt-3 btn btn-success w-100">Calculate</button>
+						</div>
+					</div>
+					
+					
+					<div class="row hide mt-5 py-4 border-top border-bottom" id="result">
+	
+						<p class="text-center">Asumming an average staking term of <span id="avg-term" class="font-weight-bold">{N}</span> month/s for the rest of stakers, your <span id="result-bag" class="font-weight-bold">{X}</span> RISE will generate aproximately:
+						</p>
+						<div class="col-12 col-md-6 offset-md-3 text-center">
+							<h5 class="mb-3 p-3" style="border-radius: 50px;background-color:#00bcd4; color:#ffffff;"><span id="daily">0.00</span> USD <span class="little">per day</span></h5>
+							<h6><span id="weekly">0.00</span> USD <span class="little">per week</span></h6>
+							<h6><span id="monthly">0.00</span> USD <span class="little">per month</span></h6>
+							<h6><span id="yearly">0.00</span> USD <span class="little">per year</span></h6>
+						</div>
+						<hr>
+					</div>
+					
+					<p class="text-center mt-5 little">
+							For more information, please refer to official channels.
+						</p>
+				</div>
+				
+			</div>
+		</div>
+	</section>
+	
+	<script>
+		
+		document.getElementById('calculate-button').onclick = function(){
+			let bag_size = parseFloat(document.getElementById('bag-size').value);
+			
+			let pool_size = parseFloat(document.getElementById('staking-pool-size').value);
+			
+			let daily_volume = parseFloat(document.getElementById('daily-volume').value);
+			
+			let term = parseFloat(document.getElementById('staking-term').value);
+			
+			let avg_term = parseFloat(document.getElementById('staking-term-avg').value);
+			
+			
+			let daily = (bag_size*term/(pool_size*avg_term)*0.04*daily_volume);
+			
+			let weekly = daily*7;
+			
+			let monthly = daily*30;
+			
+			let yearly = daily*365;
+			
+			document.getElementById('daily').innerHTML = daily.toFixed(3);
+			document.getElementById('weekly').innerHTML = weekly.toFixed(3);
+			document.getElementById('monthly').innerHTML = monthly.toFixed(3);
+			document.getElementById('yearly').innerHTML = yearly.toFixed(3);
+			
+			document.getElementById('result-bag').innerHTML = bag_size.toFixed(3);
+			document.getElementById('avg-term').innerHTML = avg_term;
+			
+			document.getElementById('result').classList.remove("hide");
+		}
+		
+		function reset(){
+			document.getElementById('result').classList.add("hide");
+		}
+	
+	</script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>
