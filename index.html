@@ -59,6 +59,41 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(255,0,69,1) 100%);
 		display:block;
 		}
 
+		.input-icon {
+  position: relative;
+}
+
+.input-icon > i {
+  position: absolute;
+  display: block;
+  transform: translate(0, -50%);
+  top: 50%;
+  pointer-events: none;
+  width: 45px;
+  text-align: center;
+	font-style: normal;
+}
+
+.input-icon > input {
+  padding-left: 45px;
+	padding-right: 0;
+}
+
+i{
+	font-weight: bold;
+	color:#00796B;
+	font-size:10pt;
+}
+
+.input-icon-right > i {
+  right: 0;
+}
+
+.input-icon-right > input {
+  padding-left: 0;
+  padding-right: 25px;
+  text-align: right;
+}
 	</style>
   </head>
   <body class="px-2">
@@ -83,15 +118,21 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(255,0,69,1) 100%);
 						
 						<div class="col-md-6 col-12 ">
 							<div class="form-group">
-								<label for="exampleFormControlInput1">Staking pool size (RISE)</label>
-								<input type="email" class="form-control" id="staking-pool-size" placeholder="72000000000">
+								<label for="exampleFormControlInput1">Staking pool size</label>
+								<div class="input-icon">
+								<input  type="text" class="form-control" id="staking-pool-size" >
+								<i>RISE</i>	
+								</div>
 							</div>
 						</div>
 						
 						<div class="col-md-6 col-12 ">
 							<div class="form-group">
-								<label for="exampleFormControlInput1">Daily volume (USD)</label>
-								<input type="email" class="form-control" id="daily-volume" placeholder="2000000">
+								<label for="exampleFormControlInput1">Daily volume</label>
+								<div class="input-icon">
+								<input type="text" class="form-control" id="daily-volume" >
+								<i>USD</i>	
+								</div>
 							</div>
 						</div>
 					</div>
@@ -99,8 +140,11 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(255,0,69,1) 100%);
 					<div class="row">
 						<div class="col-md-6 col-12 ">
 							<div class="form-group">
-								<label for="exampleFormControlInput1">Your bag size (RISE)</label>
-								<input type="email" class="form-control" id="bag-size" placeholder="72000000000">
+								<label for="exampleFormControlInput1">Your bag size</label>
+								<div class="input-icon">
+									<input type="text" class="form-control" id="bag-size" >
+									<i>RISE</i>	
+								</div>
 							</div>
 						</div>
 						
@@ -170,12 +214,33 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(255,0,69,1) 100%);
 	
 	<script>
 		
-		document.getElementById('calculate-button').onclick = function(){
-			let bag_size = parseFloat(document.getElementById('bag-size').value);
+		
+	
+	</script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"> </script>
+	<script src="https://cdn.jsdelivr.net/npm/autonumeric@4.5.4"></script>
+
+	<script>
+
+	let daily_volume_mask = new AutoNumeric('#daily-volume', AutoNumeric.getPredefinedOptions().dotDecimalCharCommaSeparator);
+	daily_volume_mask.set(1000000);
+	let bag_size_mask = new AutoNumeric('#bag-size', AutoNumeric.getPredefinedOptions().dotDecimalCharCommaSeparator);
+	bag_size_mask.set(1500000);
+	let staking_pool_mask = new AutoNumeric('#staking-pool-size', AutoNumeric.getPredefinedOptions().dotDecimalCharCommaSeparator);
+	staking_pool_mask.set(72000000000);
+
+	document.getElementById('calculate-button').onclick = function(){
+
+			let bag_size = bag_size_mask.getNumber();
 			
-			let pool_size = parseFloat(document.getElementById('staking-pool-size').value);
+			let pool_size = staking_pool_mask.getNumber();
 			
-			let daily_volume = parseFloat(document.getElementById('daily-volume').value);
+			let daily_volume = daily_volume_mask.getNumber();
 			
 			let term = parseFloat(document.getElementById('staking-term').value);
 			
@@ -204,12 +269,6 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(255,0,69,1) 100%);
 		function reset(){
 			document.getElementById('result').classList.add("hide");
 		}
-	
 	</script>
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  </body>
+</body>
 </html>
