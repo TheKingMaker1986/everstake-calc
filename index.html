@@ -128,6 +128,10 @@ input[type=checkbox]{
 	font-size:8pt;
 	color:#00bcd4;
 }
+
+.very-little-danger{
+	font-size:8pt;
+}
 	</style>
   </head>
   <body class="px-2">
@@ -148,7 +152,6 @@ input[type=checkbox]{
 						<p class="text-center">
 							Staking pools are chain-specific. This model takes into account the daily volume in usd on a specific chain (4% goes to stakers), your bag size, the staking pool size (both in RISE), your chosen staking term and an assumption on the average staking term for the rest of the pool.
 						</p>
-						
 						
 						<div class="col-md-6 col-12 ">
 							<div class="form-group">
@@ -176,9 +179,10 @@ input[type=checkbox]{
 							<div class="form-group">
 								<label for="exampleFormControlInput1">Your bag size</label>
 								<div class="input-icon">
-									<input type="text" class="form-control" id="bag-size" >
+									<input type="text" class="form-control" id="bag-size">
 									<i>RISE</i>	
 								</div>
+								<small class="text-danger very-little hide" id="bag-size-form-error">Invalid value</small>
 							</div>
 						</div>
 						
@@ -217,6 +221,15 @@ input[type=checkbox]{
 							  <option value="12">12 months</option>
 							</select>
 						</div>
+						
+						
+				</div>
+				<div class="row">
+					<div class="col-12">
+						<div id="bag-size-error" class="alert alert-danger very-little-danger py-1 hide">
+							Bag size cannot be greater that pool size unless such bag is no yet staked. To set this, use <b>advanced settings</b>.
+						</div>
+					</div>
 				</div>
 				<div class="row advanced-settings">
 						<div class="col-12 col-md-12 mt-n2">
@@ -298,6 +311,18 @@ input[type=checkbox]{
 			let bag_size = bag_size_mask.getNumber();
 			
 			let pool_size = staking_pool_mask.getNumber();
+
+			if((bag_size > pool_size) && document.getElementById('already-staking').checked){
+				document.getElementById('bag-size-error').classList.remove("hide");
+				document.getElementById('bag-size-form-error').classList.remove("hide");
+				document.getElementById('result').classList.add("hide");
+				document.getElementById('bag-size').classList.add('is-invalid');
+				return;
+			}else{
+				document.getElementById('bag-size-form-error').classList.add("hide");
+				document.getElementById('bag-size-error').classList.add("hide");
+				document.getElementById('bag-size').classList.remove('is-invalid');
+			}
 			
 			let daily_volume = daily_volume_mask.getNumber();
 			
