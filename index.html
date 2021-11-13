@@ -140,9 +140,10 @@ input[type=checkbox]{
 	
 	<section id="calc" class="mt-5">
 		<div class="container">
+			
 			<div class="row">
 				<div id="main-calc-container" class="offset-lg-2 col-lg-8 px-5 pt-5 pb-0 mb-3">
-				
+					
 					<div class="row text-center">
 						<div class="col-12 text-center">
 							<h3 class="font-weight-bold">EverStake Calculator</h3>
@@ -152,7 +153,15 @@ input[type=checkbox]{
 						<p class="text-center">
 							Staking pools are chain-specific. This model takes into account the daily volume in usd on a specific chain (4% goes to stakers), your bag size, the staking pool size (both in RISE), your chosen staking term and an assumption on the average staking term for the rest of the pool.
 						</p>
-						
+				
+							<div class="col-12 mt-2">
+								<div id="bag-size-error" class="alert alert-danger very-little-danger py-1 hide">
+									Bag size cannot be greater that pool size unless such bag is no yet staked. To set this, use <b>advanced settings</b>.
+								</div>
+								<div id="pool-size-error" class="alert alert-danger very-little-danger py-1 hide">
+									Pool size has to be greater than 0 unless your bag is no yet staked. To set this, use <b>advanced settings</b>.
+								</div>
+							</div>
 						<div class="col-md-6 col-12 ">
 							<div class="form-group">
 								<label for="exampleFormControlInput1">Staking pool size</label>
@@ -160,6 +169,8 @@ input[type=checkbox]{
 								<input  type="text" class="form-control" id="staking-pool-size" >
 								<i>RISE</i>	
 								</div>
+								<small class="text-danger very-little hide" id="pool-size-form-error">Invalid value</small>
+							
 							</div>
 						</div>
 						
@@ -224,15 +235,9 @@ input[type=checkbox]{
 						
 						
 				</div>
-				<div class="row">
-					<div class="col-12">
-						<div id="bag-size-error" class="alert alert-danger very-little-danger py-1 hide">
-							Bag size cannot be greater that pool size unless such bag is no yet staked. To set this, use <b>advanced settings</b>.
-						</div>
-					</div>
-				</div>
+				
 				<div class="row advanced-settings">
-						<div class="col-12 col-md-12 mt-n2">
+						<div class="col-12 col-md-12">
 						<div id="accordion">
 							<div>								  
 								<button class="btn btn-link collapsable-custom" id="collapse-button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -322,6 +327,18 @@ input[type=checkbox]{
 				document.getElementById('bag-size-form-error').classList.add("hide");
 				document.getElementById('bag-size-error').classList.add("hide");
 				document.getElementById('bag-size').classList.remove('is-invalid');
+			}
+
+			if((pool_size == 0) && document.getElementById('already-staking').checked){
+				document.getElementById('pool-size-error').classList.remove("hide");
+				document.getElementById('pool-size-form-error').classList.remove("hide");
+				document.getElementById('result').classList.add("hide");
+				document.getElementById('staking-pool-size').classList.add('is-invalid');
+				return;
+			}else{
+				document.getElementById('pool-size-form-error').classList.add("hide");
+				document.getElementById('pool-size-error').classList.add("hide");
+				document.getElementById('staking-pool-size').classList.remove('is-invalid');
 			}
 			
 			let daily_volume = daily_volume_mask.getNumber();
