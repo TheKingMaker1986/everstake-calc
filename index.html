@@ -1,9 +1,9 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.10/dist/clipboard.min.js"></script>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -136,9 +136,24 @@ input[type=checkbox]{
   </head>
   <body class="px-2">
 
-	<section id="header"></section>
+	<section id="header">
+					<div class="container text-center ">
+						<div class="row text-center ">
+						<div class="col-12 text-center ">
+							
+								<label class="text-white">Donations</label>
+								<p class="text-white" >0x18282F76d87D5BD9f1d271Cf16Bc33c201a37341 <a href="#" data-clipboard-text="0x18282F76d87D5BD9f1d271Cf16Bc33c201a37341">
+    Copy
+</a></p>
+
+
+							
+						</div>
+						</div>
+						</div>
+	</section>
 	
-	<section id="calc" class="mt-5">
+	<section id="calc" class="mt-1">
 		<div class="container">
 			
 			<div class="row">
@@ -212,25 +227,14 @@ input[type=checkbox]{
 							  <option value="10">10 months</option>
 							  <option value="11">11 months</option>
 							  <option value="12">12 months</option>
+							  <option value="24">24 months</option>
+							  <option value="36">36 months</option>
 							</select>
 						</div>
 						
 						<div class="col-12 col-md-3">
 							<label for="exampleFormControlSelect1">Avg. staking term</label>
-							<select class="form-control" id="staking-term-avg">
-							  <option value="1">1 month</option>
-							  <option value="2">2 months</option>
-							  <option value="3">3 months</option>
-							  <option value="4">4 months</option>
-							  <option value="5">5 months</option>
-							  <option value="6">6 months</option>
-							  <option value="7">7 months</option>
-							  <option value="8">8 months</option>
-							  <option value="9">9 months</option>
-							  <option value="10">10 months</option>
-							  <option value="11">11 months</option>
-							  <option value="12">12 months</option>
-							</select>
+							<input id="staking-term-avg" class="form-control" type="number" name="staking-term-avg" min="1" max="36" step="0.01" value="12.00">
 						</div>
 						
 						
@@ -240,7 +244,7 @@ input[type=checkbox]{
 						<div class="col-12 col-md-12">
 						<div id="accordion">
 							<div>								  
-								<button class="btn btn-link collapsable-custom" id="collapse-button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+								<button class="btn btn-link collapsable-custom" id="collapse-button" onclick="toggleText();" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
 									Show advanced settings
 								  </button>
 							  </div>
@@ -251,7 +255,7 @@ input[type=checkbox]{
 							<input type="checkbox" class="form-check-input" id="already-staking" checked>
 							<label class="form-check-label" for="already-staking ml-1">&nbsp;Already staking</label>
 							</div>
-							<p class="very-little text-justify mt-1"><b></b>Use this option to stablish if your bag size is already included in the staking pool size (already staking) or not. For small bags, the difference is not relevant, but as the bag grows, the difference is more noticeable. If advanced settings is hidden, the default value is 'already staking'.</p>
+							<p class="very-little text-justify mt-1"><b></b>Use this option to establish if your bag size is already included in the staking pool size (already staking) or not. For small bags, the difference is not relevant, but as the bag grows, the difference is more noticeable. If advanced settings is hidden, the default value is 'already staking'.</p>
 						
 							  </div>
 							</div>
@@ -385,6 +389,12 @@ input[type=checkbox]{
 		function reset(){
 			document.getElementById('result').classList.add("hide");
 		}
+
+		function toggleText(){
+			
+		}
+		
+		new ClipboardJS('a');
 	</script>
 </body>
 </html>
